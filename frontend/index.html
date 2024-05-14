@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hunter POC</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Hunter POC</h1>
+        <h2>Threat Mitigation Orion</h2>
+        <div class="controls">
+            <button id="onButton">On</button>
+            <button id="offButton">Off</button>
+            <button id="logButton">Show Logs</button>
+        </div>
+        <div id="graphContainer" class="data-stream">
+            <canvas id="dataGraph"></canvas>
+            <p>Data stream will appear here...</p>
+        </div>
+        <div id="logs" class="logs">
+            <p>Logs will appear here...</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
