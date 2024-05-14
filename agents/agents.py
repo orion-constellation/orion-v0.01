@@ -1,8 +1,9 @@
 import json
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 import chromadb
-
 import autogen
 from autogen.agentchat.contrib.retrieve_assistant_agent import RetrieveAssistantAgent
 from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
@@ -12,7 +13,7 @@ from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProx
 from autogen.retrieve_utils import TEXT_FORMATS
 
 config_list = [
-    {"model": "gpt-3.5-turbo-0125", "api_key": "<YOUR_API_KEY>", "api_type": "openai"},
+    {"model": os.getenv("MODEL"), "api_key": os.getenv("OPENAI_API_KEY"), "api_type": "openai"},
 ]
 
 assert len(config_list) > 0
