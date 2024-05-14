@@ -1,0 +1,64 @@
+2024-05-15 07:04:35,273 - INFO - Session 20240514-213435-bf41d197 is initialized
+2024-05-15 07:04:35,296 - INFO - CodeGenerator initialized successfully
+2024-05-15 07:06:23,908 - INFO - CodeInterpreter initialized successfully.
+2024-05-15 07:06:23,914 - INFO - Planner initialized successfully
+2024-05-15 07:07:25,087 - INFO - LLM output: 
+2024-05-15 07:07:25,095 - ERROR - Traceback (most recent call last):
+  File "/Users/nullzero/Documents/repos/learning_exercises/orion-poc/agents/TaskWeaver/taskweaver/llm/openai.py", line 154, in chat_completion
+    res: Any = self.client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nullzero/Library/Caches/pypoetry/virtualenvs/kgliner-mojo-IVCG5sOP-py3.12/lib/python3.12/site-packages/openai/_utils/_utils.py", line 275, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nullzero/Library/Caches/pypoetry/virtualenvs/kgliner-mojo-IVCG5sOP-py3.12/lib/python3.12/site-packages/openai/resources/chat/completions.py", line 667, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/Users/nullzero/Library/Caches/pypoetry/virtualenvs/kgliner-mojo-IVCG5sOP-py3.12/lib/python3.12/site-packages/openai/_base_client.py", line 1213, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nullzero/Library/Caches/pypoetry/virtualenvs/kgliner-mojo-IVCG5sOP-py3.12/lib/python3.12/site-packages/openai/_base_client.py", line 902, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "/Users/nullzero/Library/Caches/pypoetry/virtualenvs/kgliner-mojo-IVCG5sOP-py3.12/lib/python3.12/site-packages/openai/_base_client.py", line 993, in _request
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'message': 'Incorrect API key provided: the api key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nullzero/Documents/repos/learning_exercises/orion-poc/agents/TaskWeaver/taskweaver/session/session.py", line 202, in _send_text_message
+    post = _send_message(post.send_to, post)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nullzero/Documents/repos/learning_exercises/orion-poc/agents/TaskWeaver/taskweaver/module/tracing.py", line 174, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nullzero/Documents/repos/learning_exercises/orion-poc/agents/TaskWeaver/taskweaver/session/session.py", line 174, in _send_message
+    reply_post = self.planner.reply(
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/Users/nullzero/Documents/repos/learning_exercises/orion-poc/agents/TaskWeaver/taskweaver/module/tracing.py", line 186, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nullzero/Documents/repos/learning_exercises/orion-poc/agents/TaskWeaver/taskweaver/planner/planner.py", line 315, in reply
+    self.planner_post_translator.raw_text_to_post(
+  File "/Users/nullzero/Documents/repos/learning_exercises/orion-poc/agents/TaskWeaver/taskweaver/role/translator.py", line 85, in raw_text_to_post
+    for type_str, value, is_end in parser_stream:
+  File "/Users/nullzero/Documents/repos/learning_exercises/orion-poc/agents/TaskWeaver/taskweaver/role/translator.py", line 277, in parse_llm_output_stream_v2
+    for ev in parser:
+  File "/Users/nullzero/Documents/repos/learning_exercises/orion-poc/agents/TaskWeaver/taskweaver/utils/json_parser.py", line 389, in parse_json_stream
+    for chunk in itertools.chain(token_stream, [None]):
+  File "/Users/nullzero/Documents/repos/learning_exercises/orion-poc/agents/TaskWeaver/taskweaver/role/translator.py", line 57, in stream_filter
+    for c in s:
+  File "/Users/nullzero/Documents/repos/learning_exercises/orion-poc/agents/TaskWeaver/taskweaver/planner/planner.py", line 292, in stream_filter
+    for c in s:
+  File "/Users/nullzero/Documents/repos/learning_exercises/orion-poc/agents/TaskWeaver/taskweaver/llm/__init__.py", line 292, in _stream_smoother
+    raise llm_source_error  # type:ignore
+    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nullzero/Documents/repos/learning_exercises/orion-poc/agents/TaskWeaver/taskweaver/llm/__init__.py", line 240, in base_stream_puller
+    for msg in stream:
+  File "/Users/nullzero/Documents/repos/learning_exercises/orion-poc/agents/TaskWeaver/taskweaver/llm/openai.py", line 216, in chat_completion
+    raise Exception(f"OpenAI API request was not authorized: {e}")
+Exception: OpenAI API request was not authorized: Error code: 401 - {'error': {'message': 'Incorrect API key provided: the api key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+
+2024-05-15 07:11:27,227 - INFO - Session 20240514-213435-bf41d197 is stopped
+2024-05-15 07:11:27,259 - INFO - CodeInterpreter closed successfully
+2024-05-15 07:11:27,264 - INFO - CodeInterpreter closed successfully

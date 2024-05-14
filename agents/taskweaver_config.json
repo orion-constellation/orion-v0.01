@@ -1,0 +1,5 @@
+{
+    "llm.api_key": "the api key",
+    "llm.model": "the model name, e.g., gpt-4",
+    "execution_service.kernel_mode": "container"
+  }
