@@ -1,0 +1,83 @@
+{
+    "heuristic_name": "Bot_Like_Activity_Detection",
+    "description": "Heuristic for detecting bot-like activity based on URL permutations and high density of user registrations.",
+    "attributes": [
+        {
+            "attribute_name": "source_ip",
+            "description": "Source IP address of the request",
+            "type": "string",
+            "pattern": "ipv4"
+        },
+        {
+            "attribute_name": "user_agent",
+            "description": "User agent string of the request",
+            "type": "string"
+        },
+        {
+            "attribute_name": "url",
+            "description": "Requested URL",
+            "type": "string"
+        },
+        {
+            "attribute_name": "timestamp",
+            "description": "Timestamp of the request",
+            "type": "string",
+            "format": "date-time"
+        },
+        {
+            "attribute_name": "request_count",
+            "description": "Number of requests made by the source IP",
+            "type": "integer"
+        },
+        {
+            "attribute_name": "registration_count",
+            "description": "Number of user registrations from the source IP",
+            "type": "integer"
+        }
+    ],
+    "detection_logic": [
+        {
+            "name": "URL_Permutation_Anomaly",
+            "description": "Detects unusual patterns in URL permutations from a single IP",
+            "condition": {
+                "attribute": "url",
+                "method": "pattern_analysis",
+                "parameters": {
+                    "window_size": "10m",
+                    "threshold": 50,
+                    "pattern_variation_limit": 5
+                }
+            },
+            "action": "alert"
+        },
+        {
+            "name": "High_Registration_Density",
+            "description": "Detects a high density of user registrations from a single IP",
+            "condition": {
+                "attribute": "registration_count",
+                "method": "rate_limiting",
+                "parameters": {
+                    "window_size": "10m",
+                    "threshold": 10
+                }
+            },
+            "action": "alert"
+        },
+        {
+            "name": "Suspicious_User_Agent",
+            "description": "Detects known bot user agents or suspicious patterns in user agents",
+            "condition": {
+                "attribute": "user_agent",
+                "method": "pattern_matching",
+                "parameters": {
+                    "known_bot_agents": ["bot", "crawler", "spider", "scraper"]
+                }
+            },
+            "action": "alert"
+        }
+    ],
+    "alerting": {
+        "methods": ["log", "email"],
+        "severity_level": "high"
+    }
+}

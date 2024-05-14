@@ -1,0 +1,3 @@
+[submodule "agents/TaskWeaver"]
+	path = agents/TaskWeaver
+	url = https://github.com/TaskWeaver

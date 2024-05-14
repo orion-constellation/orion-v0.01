@@ -1,0 +1,71 @@
+{
+    "nodes": [
+        {
+            "id": "IOC",
+            "label": "Indicator of Compromise",
+            "type": "artifact",
+            "examples": ["IP address", "file hash", "URL"]
+        },
+        {
+            "id": "TTP",
+            "label": "Tactics, Techniques, and Procedures",
+            "type": "methodology",
+            "examples": ["phishing", "malware installation", "data exfiltration"]
+        },
+        {
+            "id": "ThreatActor",
+            "label": "Threat Actor",
+            "type": "entity",
+            "examples": ["nation-state hackers", "cybercriminal groups"]
+        },
+        {
+            "id": "AffectedAssets",
+            "label": "Affected Assets",
+            "type": "resource",
+            "examples": ["servers", "databases", "endpoints"]
+        },
+        {
+            "id": "IncidentImpact",
+            "label": "Incident Impact",
+            "type": "consequence",
+            "examples": ["data loss", "financial damage", "service disruption"]
+        }
+    ],
+    "edges": [
+        {
+            "source": "IOC",
+            "target": "TTP",
+            "relationship": "evidence_of"
+        },
+        {
+            "source": "IOC",
+            "target": "ThreatActor",
+            "relationship": "attributed_to"
+        },
+        {
+            "source": "IOC",
+            "target": "AffectedAssets",
+            "relationship": "found_on"
+        },
+        {
+            "source": "TTP",
+            "target": "ThreatActor",
+            "relationship": "used_by"
+        },
+        {
+            "source": "TTP",
+            "target": "IncidentImpact",
+            "relationship": "causes"
+        },
+        {
+            "source": "ThreatActor",
+            "target": "AffectedAssets",
+            "relationship": "targets"
+        },
+        {
+            "source": "AffectedAssets",
+            "target": "IncidentImpact",
+            "relationship": "suffers"
+        }
+    ]
+}
